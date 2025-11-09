@@ -53,9 +53,7 @@ Complete implementation of **StockGPT: A GenAI Model for Stock Prediction and Tr
 
 ### Configuration
 
-- `configs/train.yaml` - Training configuration
-- `configs/infer.yaml` - Inference configuration
-- `configs/backtest.yaml` - Backtesting configuration
+- `configs/config.yaml` - Unified global configuration
 
 ### Documentation
 
@@ -149,7 +147,7 @@ make install
 python scripts/prepare_crsp.py --data-path ~/stockGPT/data
 
 # Train
-python scripts/train_stockgpt.py --config configs/train.yaml
+python scripts/train_stockgpt.py --config configs/config.yaml
 
 # Predict
 python scripts/predict.py --checkpoint outputs/checkpoints/best_model.pt

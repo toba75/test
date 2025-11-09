@@ -213,7 +213,7 @@ make install</pre>
             <pre>python scripts/prepare_crsp.py --data-path ~/stockGPT/data --output prepared/returns.parquet</pre>
             
             <h3>Training</h3>
-            <pre>python scripts/train_stockgpt.py --config configs/train.yaml --data prepared/returns.parquet</pre>
+            <pre>python scripts/train_stockgpt.py --config configs/config.yaml --data prepared/returns.parquet</pre>
             
             <h3>Prediction</h3>
             <pre>python scripts/predict.py --checkpoint outputs/checkpoints/best_model.pt</pre>

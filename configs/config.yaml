@@ -1,0 +1,74 @@
+# StockGPT Global Configuration
+# Unified configuration for training, inference, and backtesting
+
+# Model architecture
+model:
+  vocab_size: 402
+  seq_len: 256
+  d_model: 128
+  n_layers: 4
+  n_heads: 4
+  dropout: 0.2
+  checkpoint_path: outputs/checkpoints/best_model.pt
+
+# Training parameters
+train:
+  batch_size: 64
+  num_steps: 10000
+  learning_rate: 0.0003
+  warmup_steps: 500
+  weight_decay: 0.01
+  grad_clip: 1.0
+  log_interval: 100
+  eval_interval: 500
+  save_interval: 1000
+  use_amp: true
+  seed: 42
+
+# Inference parameters
+infer:
+  batch_size: 128
+  device: cuda  # or cpu
+  use_amp: true
+
+# Portfolio parameters for backtesting
+portfolio:
+  top_pct: 10  # Top 10% long
+  bottom_pct: 10  # Bottom 10% short
+  rebalance_freq: daily
+  
+  # Liquidity filters (deviation from paper's market cap filter)
+  use_liquidity_filter: true
+  min_percentile: 10  # Exclude bottom 10% by liquidity
+  min_adv_real: 5000000  # Min $5M average daily volume (2025 dollars)
+  min_price: 3.0  # Minimum price filter (dollars)
+  
+  # Liquidity score components
+  adv_window: 60  # 60-day rolling median
+  illiq_window: 21  # Monthly illiquidity measure
+  
+  # CPI deflator settings
+  cpi_base_year: 2025
+
+# Data configuration
+data:
+  data_path: ~/stockGPT/data
+  prepared_path: null
+  returns_output: null
+  train_start: "1926-01-01"
+  train_end: "2000-12-31"
+  val_start: "1991-01-01"
+  val_end: "2000-12-31"
+  test_start: "2001-01-01"
+  test_end: "2023-12-31"
+
+# Output paths
+output:
+  checkpoint_dir: outputs/checkpoints
+  log_dir: outputs/logs
+  mlflow_uri: file:./mlruns
+  experiment_name: stockgpt
+  predictions_path: outputs/predictions.parquet
+  results_path: outputs/backtest_results.parquet
+  report_path: outputs/backtest_report.txt
+  equity_curve_path: outputs/equity_curve.png

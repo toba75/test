@@ -44,7 +44,7 @@ Date range: 2015-01-02 to 2023-12-29
 
 ### 2. Train Model (Mini Version)
 
-For a quick test, modify `configs/train.yaml`:
+For a quick test, modify `configs/config.yaml`:
 ```yaml
 train:
   batch_size: 8
@@ -55,7 +55,7 @@ train:
 Then train:
 ```bash
 python scripts/train_stockgpt.py \
-    --config configs/train.yaml \
+    --config configs/config.yaml \
     --data prepared/returns.parquet
 ```
 
@@ -132,9 +132,9 @@ python scripts/prepare_crsp.py --data-path /path/to/your/data
 
 ## Configuration
 
-### Training Configuration
+### Global Configuration
 
-Edit `configs/train.yaml` to customize:
+Edit `configs/config.yaml` to customize all settings:
 
 ```yaml
 # Model size
@@ -153,6 +153,19 @@ train:
   learning_rate: 0.0003
   use_amp: true         # Mixed precision (bf16)
 
+# Inference settings
+infer:
+  batch_size: 128
+  device: cuda          # or cpu
+  use_amp: true
+
+# Portfolio settings
+portfolio:
+  top_pct: 10           # Long top 10%
+  bottom_pct: 10        # Short bottom 10%
+  min_price: 3.0        # Minimum stock price
+  min_adv_real: 5000000 # Minimum daily volume ($5M)
+
 # Data splits
 data:
   train_start: "1926-01-01"
@@ -161,18 +174,6 @@ data:
   val_end: "2000-12-31"
   test_start: "2001-01-01"
   test_end: "2023-12-31"
-```
-
-### Portfolio Configuration
-
-Edit `configs/backtest.yaml`:
-
-```yaml
-portfolio:
-  top_pct: 10           # Long top 10%
-  bottom_pct: 10        # Short bottom 10%
-  min_price: 3.0        # Minimum stock price
-  min_adv_real: 5000000 # Minimum daily volume ($5M)
 ```
 
 ## Expected Performance
@@ -191,7 +192,7 @@ From the paper (reference benchmarks):
 
 ### Out of Memory (OOM)
 
-Reduce batch size in `configs/train.yaml`:
+Reduce batch size in `configs/config.yaml`:
 ```yaml
 train:
   batch_size: 32  # or 16, 8
