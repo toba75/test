@@ -78,15 +78,15 @@ train/{dataset.py, sampler.py, loop.py, optim.py}
 infer/{forecast.py}
 eval/{fmb.py, portfolio.py, metrics.py, reports.py}
 utils/{seed.py, logging.py, config.py}
-configs/{train.yaml, infer.yaml, backtest.yaml}
+configs/config.yaml
 scripts/{prepare_crsp.py, train_stockgpt.py, predict.py, backtest_daily.py, eval_fmb.py}
 docs/{ssrn-4787199.pdf, README-methodo.md}
 tests/...
 www/minisite/...
 
 
-- `docs/ssrn-4787199.pdf` **doit être référencé** dans les docstrings/README et ici comme **référence primaire** du protocole.  
-- `configs/train.yaml` doit encoder **séq=256, vocab=402, d=128, n_layers=4, n_heads=4, dropout=0.2, batch=64, steps=10000** (défaut). 
+- `docs/ssrn-4787199.pdf` **doit être référencé** dans les docstrings/README et ici comme **référence primaire** du protocole.
+- `configs/config.yaml` doit encoder **séq=256, vocab=402, d=128, n_layers=4, n_heads=4, dropout=0.2, batch=64, steps=10000** (défaut). 
 
 ---
 
