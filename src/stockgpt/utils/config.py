@@ -3,6 +3,7 @@
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
+
 import yaml
 
 
@@ -49,21 +50,20 @@ class DataConfig:
 
 def load_config(config_path: Path) -> dict[str, Any]:
     """Load configuration from YAML file.
-    
+
     Args:
         config_path: Path to YAML config file
-    
+
     Returns:
         Configuration dictionary
     """
-    with open(config_path, 'r') as f:
-        config = yaml.safe_load(f)
-    return config
+    with open(config_path) as f:
+        return yaml.safe_load(f)
 
 
 def save_config(config: dict[str, Any], config_path: Path) -> None:
     """Save configuration to YAML file.
-    
+
     Args:
         config: Configuration dictionary
         config_path: Path to save YAML config file

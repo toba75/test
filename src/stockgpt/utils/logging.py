@@ -11,25 +11,25 @@ def setup_logger(
     log_file: Path | None = None,
 ) -> logging.Logger:
     """Setup structured logger.
-    
+
     Args:
         name: Logger name
         level: Logging level
         log_file: Optional path to log file
-    
+
     Returns:
         Configured logger instance
     """
     logger = logging.getLogger(name)
     logger.setLevel(level)
-    
+
     # Clear existing handlers
     logger.handlers.clear()
-    
+
     # Console handler
     console_handler = logging.StreamHandler(sys.stdout)
     console_handler.setLevel(level)
-    
+
     # Format
     formatter = logging.Formatter(
         '%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -37,7 +37,7 @@ def setup_logger(
     )
     console_handler.setFormatter(formatter)
     logger.addHandler(console_handler)
-    
+
     # File handler if specified
     if log_file is not None:
         log_file.parent.mkdir(parents=True, exist_ok=True)
@@ -45,5 +45,5 @@ def setup_logger(
         file_handler.setLevel(level)
         file_handler.setFormatter(formatter)
         logger.addHandler(file_handler)
-    
+
     return logger
