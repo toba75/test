@@ -1,0 +1,33 @@
+# StockGPT Backtesting Configuration
+
+# Portfolio parameters
+portfolio:
+  top_pct: 10  # Top 10% long
+  bottom_pct: 10  # Bottom 10% short
+  rebalance_freq: daily
+  
+  # Liquidity filters (deviation from paper's market cap filter)
+  use_liquidity_filter: true
+  min_percentile: 10  # Exclude bottom 10% by liquidity
+  min_adv_real: 5000000  # Min $5M average daily volume (2025 dollars)
+  min_price: 3.0  # Minimum price filter (dollars)
+  
+  # Liquidity score components
+  adv_window: 60  # 60-day rolling median
+  illiq_window: 21  # Monthly illiquidity measure
+  
+  # CPI deflator settings
+  cpi_base_year: 2025
+
+# Data configuration
+data:
+  predictions_path: outputs/predictions.parquet
+  data_path: ~/stockGPT/data
+  start_date: "2001-01-01"
+  end_date: "2023-12-31"
+
+# Output
+output:
+  results_path: outputs/backtest_results.parquet
+  report_path: outputs/backtest_report.txt
+  equity_curve_path: outputs/equity_curve.png
